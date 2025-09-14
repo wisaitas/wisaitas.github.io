@@ -1,9 +1,511 @@
 <!doctype html>
 <html lang="th">
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>สวัสดี GitHub Pages</title>
-<h1>เว็บสแตติกหน้าแรก 🚀</h1>
-<p>เสิร์ฟจาก GitHub Pages ล้วนๆ</p>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b1020" />
+    <title>wisaitas • Backend · DevOps · SRE · Infra</title>
+    <meta name="description"
+        content="Portfolio & playground ของ wisaitas — โชว์ผลงานสาย Backend, DevOps, Site Reliability, Infrastructure พร้อมลิสต์โปรเจ็กต์จาก GitHub แบบอัตโนมัติ." />
+    <style>
+        :root {
+            --bg: #0b1020;
+            --panel: rgba(255, 255, 255, 0.06);
+            --panel-strong: rgba(255, 255, 255, 0.12);
+            --fg: #dbe7ff;
+            --muted: #9fb3d9;
+            --brand: #7aa2ff;
+            --accent: #6bffb0;
+            --warn: #ffcc66;
+            --danger: #ff6b81;
+            --ok: #3bd671;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+            background: radial-gradient(1200px 600px at 10% 0%, #0e1530 0%, #0b1020 40%, #060913 100%),
+                conic-gradient(from 210deg at 80% 10%, rgba(122, 162, 255, 0.14), rgba(107, 255, 176, 0.08), transparent 30%) no-repeat;
+            color: var(--fg);
+            letter-spacing: .2px;
+        }
+
+        a {
+            color: var(--brand);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        /* ——— NAV ——— */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: linear-gradient(180deg, rgba(11, 16, 32, .9), rgba(11, 16, 32, .6));
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--panel-strong);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+        }
+
+        .brand .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 14px var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--panel);
+            border: 1px solid var(--panel-strong);
+            padding: 8px 12px;
+            border-radius: 12px;
+            color: var(--fg);
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            transition: transform .08s ease, background .2s ease, border-color .2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            border-color: var(--brand);
+        }
+
+        /* ——— HERO ——— */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 26px;
+            align-items: center;
+            padding: 40px 0 16px;
+        }
+
+        .hero h1 {
+            margin: 0 0 10px;
+            font-size: clamp(28px, 4.2vw, 48px);
+            line-height: 1.05;
+        }
+
+        .hero p {
+            color: var(--muted);
+            margin-top: 0;
+        }
+
+        .badgebar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .badge {
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px dashed var(--panel-strong);
+            background: rgba(122, 162, 255, 0.08);
+            font-size: 12px;
+        }
+
+        .term {
+            background: #0a0f1e;
+            border: 1px solid var(--panel-strong);
+            border-radius: 16px;
+            padding: 14px;
+            box-shadow: var(--shadow);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+        }
+
+        .term .bar {
+            display: flex;
+            gap: 8px;
+            padding-bottom: 8px;
+        }
+
+        .dot-r {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ff5f56;
+        }
+
+        .dot-y {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ffbd2e;
+        }
+
+        .dot-g {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #27c93f;
+        }
+
+        .term pre {
+            margin: 10px 0 0;
+            color: #d3e1ff;
+            white-space: pre-wrap;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1.05em;
+            background: #9cc2ff;
+            vertical-align: -2px;
+            animation: blink 1s steps(1) infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* ——— TOOLBAR ——— */
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            background: var(--panel);
+            border: 1px solid var(--panel-strong);
+            padding: 6px 10px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .chip.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(107, 255, 176, 0.15) inset;
+        }
+
+        .search {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .search input {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid var(--panel-strong);
+            background: var(--panel);
+            color: var(--fg);
+        }
+
+        /* ——— PROJECTS ——— */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.04));
+            border: 1px solid var(--panel-strong);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .card h3 {
+            margin: 0;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .desc {
+            color: var(--muted);
+            min-height: 36px;
+        }
+
+        .meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .pill {
+            font-size: 12px;
+            padding: 4px 8px;
+            border: 1px solid var(--panel-strong);
+            border-radius: 999px;
+        }
+
+        .star::before {
+            content: "★ ";
+            color: var(--warn);
+        }
+
+        .lang-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 6px;
+            vertical-align: -1px;
+        }
+
+        .archived {
+            border-style: dashed;
+            opacity: .7;
+        }
+
+        /* ——— FOOTER ——— */
+        footer {
+            margin: 40px 0 20px;
+            color: var(--muted);
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* ——— Responsive ——— */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="wrap nav-inner">
+            <div class="brand"><span class="dot"></span><span>wisaitas::<span
+                        style="color:var(--accent)">portfolio</span></span></div>
+            <div class="nav-links">
+                <a class="btn" href="#projects">Projects</a>
+                <a class="btn" href="https://github.com/wisaitas" target="_blank" rel="noopener">GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="wrap hero">
+        <div>
+            <h1>Backend · DevOps · SRE · Infra</h1>
+            <p>บันทึกสนามรบของระบบจริง: Go, Postgres, Redis, Kafka/RabbitMQ, Docker, Kubernetes, Terraform, GitHub
+                Actions, AWS. โค้ดพร้อมเล่น—โปรเจ็กต์ดึงสดจาก GitHub.</p>
+            <div class="badgebar">
+                <span class="badge">Go</span>
+                <span class="badge">PostgreSQL</span>
+                <span class="badge">Redis</span>
+                <span class="badge">RabbitMQ</span>
+                <span class="badge">Kafka</span>
+                <span class="badge">Docker</span>
+                <span class="badge">Kubernetes</span>
+                <span class="badge">KEDA</span>
+                <span class="badge">Istio</span>
+                <span class="badge">Terraform</span>
+                <span class="badge">GitHub Actions</span>
+                <span class="badge">AWS</span>
+                <span class="badge">k6</span>
+            </div>
+        </div>
+
+        <div class="term" aria-label="terminal">
+            <div class="bar"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+            <pre id="terminal"></pre>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <div class="toolbar">
+            <div class="filters" id="filters"></div>
+            <div class="search"><input id="q" type="search" placeholder="ค้นหาโปรเจ็กต์… (ชื่อ/คำอธิบาย/ภาษา)" /></div>
+        </div>
+
+        <section id="projects" class="grid" aria-live="polite"></section>
+
+        <footer>
+            <div>Made with ♥ on GitHub Pages • <a href="https://github.com/wisaitas" target="_blank"
+                    rel="noopener">@wisaitas</a></div>
+        </footer>
+    </main>
+
+    <script>
+        const username = 'wisaitas';
+
+        // ——— Fancy typewriter for terminal ———
+        const termLines = [
+            '$ whoami',
+            'wisaitas — backend/devops/sre',
+            '$ stack',
+            'go · postgres · redis · kafka/rabbitmq · docker · k8s · terraform · github-actions · aws · k6',
+            '$ motto',
+            'ship small, observe hard, automate everything',
+            '$ ls projects/ — live from GitHub API\n'
+        ];
+        const tp = document.getElementById('terminal');
+        let i = 0, j = 0, buffer = '';
+        function typeIt() {
+            if (i < termLines.length) {
+                const line = termLines[i];
+                if (j <= line.length) {
+                    buffer = termLines.slice(0, i).join('\n') + (i ? '\n' : '') + line.slice(0, j) + '<span class="cursor"></span>';
+                    tp.innerHTML = buffer;
+                    j++;
+                    setTimeout(typeIt, 14 + Math.random() * 40);
+                } else {
+                    i++; j = 0; setTimeout(typeIt, 350);
+                }
+            } else {
+                tp.innerHTML = termLines.join('\n');
+            }
+        }
+        typeIt();
+
+        // ——— Fetch repos ———
+        const projectsEl = document.getElementById('projects');
+        const filtersEl = document.getElementById('filters');
+        const qEl = document.getElementById('q');
+
+        let repos = [], languages = new Set(), activeLang = 'All';
+
+        async function loadRepos() {
+            try {
+                const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`, {
+                    headers: { 'Accept': 'application/vnd.github+json' }
+                });
+                const data = await res.json();
+                // Filter forks & super-old template junk if any
+                repos = data.filter(r => !r.fork);
+                // Collect languages
+                repos.forEach(r => { if (r.language) languages.add(r.language); });
+                // Sort by stars desc then pushed_at desc
+                repos.sort((a, b) => (b.stargazers_count - a.stargazers_count) || (new Date(b.pushed_at) - new Date(a.pushed_at)));
+                buildFilters();
+                render();
+            } catch (e) {
+                console.error(e);
+                projectsEl.innerHTML = `<div class="card">ไม่สามารถโหลดรายการจาก GitHub ได้ ลองรีเฟรชอีกครั้งภายหลัง</div>`;
+            }
+        }
+
+        function buildFilters() {
+            const langs = ['All', ...Array.from(languages).sort()];
+            filtersEl.innerHTML = langs.map(l => `<button class="chip${l === activeLang ? ' active' : ''}" data-lang="${l}">${l}</button>`).join('');
+            filtersEl.querySelectorAll('.chip').forEach(btn => btn.addEventListener('click', () => {
+                activeLang = btn.dataset.lang; document.querySelectorAll('.chip').forEach(c => c.classList.remove('active')); btn.classList.add('active'); render();
+            }));
+        }
+
+        function humanTime(iso) {
+            const d = new Date(iso); const diff = (Date.now() - d.getTime()) / 1000; // seconds
+            if (diff < 60) return 'just now';
+            const m = diff / 60; if (m < 60) return `${Math.floor(m)}m ago`;
+            const h = m / 60; if (h < 24) return `${Math.floor(h)}h ago`;
+            const day = h / 24; if (day < 30) return `${Math.floor(day)}d ago`;
+            return d.toISOString().split('T')[0];
+        }
+
+        function langColor(lang) {
+            // tiny palette for popular langs; fallback is brand color
+            const map = { 'Go': '#00ADD8', 'JavaScript': '#f1e05a', 'TypeScript': '#3178c6', 'HTML': '#e34c26', 'CSS': '#563d7c', 'Shell': '#89e051', 'Python': '#3572A5' };
+            return map[lang] || '#7aa2ff';
+        }
+
+        function render() {
+            const q = qEl.value?.toLowerCase() || '';
+            const items = repos.filter(r => {
+                const byLang = (activeLang === 'All') || (r.language === activeLang);
+                const byQuery = !q || (r.name?.toLowerCase().includes(q)) || (r.description?.toLowerCase().includes(q)) || (r.language?.toLowerCase().includes(q));
+                return byLang && byQuery;
+            });
+
+            if (!items.length) {
+                projectsEl.innerHTML = '<div class="card">ไม่พบโปรเจ็กต์ที่ตรงเงื่อนไข</div>';
+                return;
+            }
+
+            projectsEl.innerHTML = items.map(r => `
+        <article class="card ${r.archived ? 'archived' : ''}">
+          <h3>${r.name}${r.archived ? ' <span class="pill" title="Archived">archived</span>' : ''}</h3>
+          <div class="desc">${r.description ? r.description.replace(/</g, '&lt;') : '—'}</div>
+          <div class="meta">
+            ${r.language ? `<span class="pill"><span class="lang-dot" style="background:${langColor(r.language)}"></span>${r.language}</span>` : ''}
+            <span class="pill star" title="Stars">${r.stargazers_count}</span>
+            <span class="pill" title="Last push">updated ${humanTime(r.pushed_at)}</span>
+          </div>
+          <div class="actions">
+            <a class="btn" href="${r.html_url}" target="_blank" rel="noopener">Code</a>
+            ${r.homepage ? `<a class="btn" href="${r.homepage}" target="_blank" rel="noopener">Demo</a>` : ''}
+          </div>
+        </article>
+      `).join('');
+        }
+
+        qEl.addEventListener('input', render);
+        loadRepos();
+    </script>
+</body>
 
 </html>

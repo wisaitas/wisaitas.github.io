@@ -443,7 +443,7 @@
             color: #ffd4dc;
         }
 
-        /* DEVOPS AVATAR (ตัวการ์ตูน) */
+        /* DEVOPS AVATAR */
         .avatar-wrapper {
             position: relative;
             margin-top: 10px;
@@ -728,7 +728,7 @@
             background: rgba(4, 9, 22, 0.96);
         }
 
-        /* PROJECTS GRID */
+        /* SECTION HEADING */
         .section-heading {
             margin: 26px 0 10px;
             font-size: 14px;
@@ -747,6 +747,7 @@
             opacity: .6;
         }
 
+        /* PROJECTS GRID */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -905,9 +906,172 @@
             color: var(--muted);
         }
 
+        /* PAGINATION */
+        .pagination {
+            margin-top: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .pagination-summary {
+            opacity: .9;
+        }
+
+        .pagination-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .page-btn {
+            background: rgba(8, 12, 30, 0.95);
+            border: 1px solid rgba(122, 162, 255, 0.4);
+            border-radius: 999px;
+            padding: 4px 9px;
+            font-size: 11px;
+            color: var(--muted);
+            cursor: pointer;
+            transition: background .15s ease, border-color .15s ease, color .15s ease, transform .06s ease, box-shadow .12s ease;
+        }
+
+        .page-btn:hover:not([disabled]) {
+            background: rgba(11, 18, 40, 0.98);
+            border-color: var(--accent);
+            color: var(--fg);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(4, 10, 25, 0.9);
+        }
+
+        .page-btn.active {
+            background: var(--accent-soft);
+            border-color: var(--accent);
+            color: var(--fg);
+        }
+
+        .page-btn[disabled] {
+            opacity: .35;
+            cursor: default;
+            box-shadow: none;
+        }
+
+        /* CERTIFICATIONS */
+        .cert-section {
+            margin-top: 32px;
+            padding: 18px 16px 16px;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(135deg,
+                    rgba(7, 15, 40, 0.96),
+                    rgba(5, 9, 26, 0.98));
+            border: 1px solid rgba(122, 162, 255, 0.4);
+            box-shadow: var(--shadow);
+        }
+
+        .cert-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .cert-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            color: var(--muted);
+        }
+
+        .cert-chip {
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(122, 162, 255, 0.5);
+            background: rgba(6, 12, 30, 0.96);
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+        }
+
+        .cert-card {
+            border-radius: 14px;
+            padding: 10px 12px;
+            border: 1px solid rgba(122, 162, 255, 0.4);
+            background: rgba(4, 9, 24, 0.98);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            position: relative;
+            overflow: hidden;
+            transition: transform .12s ease, box-shadow .16s ease, border-color .15s ease;
+        }
+
+        .cert-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 0 0, rgba(107, 255, 176, 0.14), transparent 60%);
+            opacity: 0;
+            transition: opacity .2s ease;
+            pointer-events: none;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 32px rgba(4, 10, 25, 0.9);
+            border-color: var(--accent);
+        }
+
+        .cert-card:hover::before {
+            opacity: 1;
+        }
+
+        .cert-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .cert-meta {
+            font-size: 11px;
+            color: var(--muted);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .cert-badge {
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(107, 255, 176, 0.65);
+            background: rgba(6, 24, 16, 0.96);
+            color: #c4fbe0;
+        }
+
+        .cert-link {
+            margin-top: 4px;
+            font-size: 12px;
+        }
+
+        .cert-link a {
+            text-decoration: none;
+        }
+
+        .cert-link a:hover {
+            text-decoration: underline;
+        }
+
         /* CONTACT SECTION */
         .contact-section {
-            margin-top: 36px;
+            margin-top: 32px;
             padding: 18px 16px 16px;
             border-radius: var(--radius-lg);
             background: linear-gradient(135deg,
@@ -1067,9 +1231,8 @@
             </div>
             <div class="nav-links">
                 <a class="btn-ghost btn" href="#projects">Projects</a>
-                <a class="btn-ghost btn" href="#contact">
-                    Contact
-                </a>
+                <a class="btn-ghost btn" href="#certs">Certs</a>
+                <a class="btn-ghost btn" href="#contact">Contact</a>
                 <a class="btn" href="https://github.com/wisaitas" target="_blank" rel="noopener">
                     <span class="dot-inline"></span> GitHub
                 </a>
@@ -1184,6 +1347,30 @@
         </div>
 
         <section id="projects" class="grid" aria-live="polite"></section>
+        <div id="pagination" class="pagination"></div>
+
+        <!-- CERTIFICATIONS SECTION -->
+        <section id="certs" class="cert-section">
+            <div class="cert-header">
+                <div class="cert-title">Certifications</div>
+                <div class="cert-chip">Cloud side covered • AWS</div>
+            </div>
+            <div class="cert-grid">
+                <article class="cert-card">
+                    <div class="cert-name">AWS Certified Cloud Practitioner</div>
+                    <div class="cert-meta">
+                        <span>Issuer: Amazon Web Services (AWS)</span>
+                        <span class="cert-badge">Active</span>
+                    </div>
+                    <div class="cert-link">
+                        <a href="https://cp.certmetrics.com/amazon/en/public/verify/credential/422ee9eb32e546c1b93ae13c9a5a477d"
+                           target="_blank" rel="noopener">
+                            🔗 Verify credential on AWS
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
 
         <!-- CONTACT SECTION -->
         <section id="contact" class="contact-section">
@@ -1197,9 +1384,9 @@
                         <div class="contact-label">LinkedIn</div>
                         <div class="contact-value">Wisaitas Kampanat</div>
                         <a class="contact-link"
-                            href="https://www.linkedin.com/in/wisaitas-kampanat-ba8265233/"
-                            target="_blank" rel="noopener">
-                            View my profile on LinkedIn.
+                           href="https://www.linkedin.com/in/wisaitas-kampanat-ba8265233/"
+                           target="_blank" rel="noopener">
+                           View my profile on LinkedIn.
                         </a>
                     </div>
                     <div class="contact-chip">Career / Networking</div>
@@ -1209,8 +1396,8 @@
                         <div class="contact-label">Facebook</div>
                         <div class="contact-value">@Jiwwisaitad</div>
                         <a class="contact-link"
-                            href="https://www.facebook.com/Jiwwisaitad/"
-                            target="_blank" rel="noopener">
+                           href="https://www.facebook.com/Jiwwisaitad/"
+                           target="_blank" rel="noopener">
                             Drop me a message on Facebook.
                         </a>
                     </div>
@@ -1271,6 +1458,7 @@
         const projectsEl = document.getElementById('projects');
         const filtersEl = document.getElementById('filters');
         const qEl = document.getElementById('q');
+        const paginationEl = document.getElementById('pagination');
 
         const metricReposEl = document.getElementById('metric-repos');
         const metricLangsEl = document.getElementById('metric-langs');
@@ -1279,6 +1467,8 @@
         let repos = [];
         let languages = new Set();
         let activeLang = 'All';
+        let currentPage = 1;
+        const pageSize = 10;
 
         async function loadRepos() {
             try {
@@ -1310,6 +1500,7 @@
             } catch (e) {
                 console.error(e);
                 projectsEl.innerHTML = `<div class="empty-card">ไม่สามารถโหลดรายการจาก GitHub ได้ในตอนนี้ ลองรีเฟรชภายหลังอีกครั้ง.</div>`;
+                paginationEl.innerHTML = '';
             }
         }
 
@@ -1329,6 +1520,7 @@
             filtersEl.querySelectorAll('.chip').forEach(btn =>
                 btn.addEventListener('click', () => {
                     activeLang = btn.dataset.lang;
+                    currentPage = 1;
                     document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
                     btn.classList.add('active');
                     render();
@@ -1372,6 +1564,50 @@
                 .replace(/>/g, '&gt;');
         }
 
+        function gotoPage(page, totalPages) {
+            const clamped = Math.min(Math.max(page, 1), totalPages);
+            if (clamped === currentPage) return;
+            currentPage = clamped;
+            render();
+            const top = projectsEl.getBoundingClientRect().top + window.scrollY - 140;
+            window.scrollTo({ top, behavior: 'smooth' });
+        }
+
+        function renderPagination(totalItems, totalPages) {
+            if (totalPages <= 1) {
+                paginationEl.innerHTML = '';
+                return;
+            }
+
+            const start = (currentPage - 1) * pageSize + 1;
+            const end = Math.min(currentPage * pageSize, totalItems);
+
+            let pagesHtml = '';
+            for (let p = 1; p <= totalPages; p++) {
+                pagesHtml += `<button class="page-btn${p === currentPage ? ' active' : ''}" data-page="${p}">${p}</button>`;
+            }
+
+            paginationEl.innerHTML = `
+                <div class="pagination-summary">
+                    Showing ${start}–${end} of ${totalItems} repos
+                </div>
+                <div class="pagination-controls">
+                    <button class="page-btn prev" data-page="${currentPage - 1}" ${currentPage === 1 ? 'disabled' : ''}>Prev</button>
+                    ${pagesHtml}
+                    <button class="page-btn next" data-page="${currentPage + 1}" ${currentPage === totalPages ? 'disabled' : ''}>Next</button>
+                </div>
+            `;
+
+            const btns = paginationEl.querySelectorAll('.page-btn[data-page]');
+            btns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const page = Number(btn.dataset.page);
+                    if (!Number.isFinite(page)) return;
+                    gotoPage(page, totalPages);
+                });
+            });
+        }
+
         function render() {
             const q = qEl.value ? qEl.value.toLowerCase() : '';
             const items = repos.filter(r => {
@@ -1385,12 +1621,21 @@
 
             if (!items.length) {
                 projectsEl.innerHTML = '<div class="empty-card">ไม่พบโปรเจ็กต์ที่ตรงเงื่อนไข ลองเปลี่ยนภาษา หรือคำค้นดูนะ.</div>';
+                paginationEl.innerHTML = '';
                 return;
             }
 
-            // Top 3 are treated as "featured"
-            const html = items.map((r, idx) => {
-                const featured = idx < 3;
+            const totalPages = Math.ceil(items.length / pageSize) || 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+
+            const startIndex = (currentPage - 1) * pageSize;
+            const endIndex = startIndex + pageSize;
+            const pageItems = items.slice(startIndex, endIndex);
+
+            const html = pageItems.map((r, idx) => {
+                // featured นับตาม index ของ items ทั้งก้อน ไม่ใช่แค่หน้า
+                const globalIndex = startIndex + idx;
+                const featured = globalIndex < 3;
                 const archived = r.archived;
                 const classes = ['card'];
                 if (featured) classes.push('featured');
@@ -1429,9 +1674,14 @@
             }).join('');
 
             projectsEl.innerHTML = html;
+            renderPagination(items.length, totalPages);
         }
 
-        qEl.addEventListener('input', render);
+        qEl.addEventListener('input', () => {
+            currentPage = 1;
+            render();
+        });
+
         loadRepos();
     </script>
 </body>

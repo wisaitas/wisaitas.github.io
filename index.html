@@ -60,6 +60,21 @@
             mix-blend-mode: soft-light;
             opacity: .7;
             z-index: -1;
+            animation: gridDrift 24s linear infinite;
+        }
+
+        @keyframes gridDrift {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            50% {
+                transform: translate3d(-15px, -10px, 0);
+            }
+
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
         }
 
         a {
@@ -111,6 +126,24 @@
             border-radius: 50%;
             background: var(--accent);
             box-shadow: 0 0 18px var(--accent);
+            animation: pulseDot 1.8s ease-in-out infinite;
+        }
+
+        @keyframes pulseDot {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.25);
+                opacity: .8;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         .brand span:last-child {
@@ -222,6 +255,13 @@
             text-transform: uppercase;
             letter-spacing: .08em;
             color: var(--muted);
+            transition: transform .1s ease, box-shadow .15s ease, border-color .15s ease;
+        }
+
+        .badge:hover {
+            transform: translateY(-1px);
+            border-color: var(--accent);
+            box-shadow: 0 6px 18px rgba(7, 20, 40, 0.9);
         }
 
         .hero-secondary {
@@ -252,6 +292,42 @@
             border: 1px solid rgba(107, 255, 176, 0.08);
             mix-blend-mode: screen;
             pointer-events: none;
+        }
+
+        .term::after {
+            content: "";
+            position: absolute;
+            left: -40%;
+            right: -40%;
+            height: 18px;
+            top: -10%;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.14),
+                    transparent);
+            opacity: 0;
+            transform: translateY(0);
+            animation: scanLine 5s linear infinite;
+        }
+
+        @keyframes scanLine {
+            0% {
+                opacity: 0;
+                transform: translateY(-60%);
+            }
+
+            10% {
+                opacity: .2;
+            }
+
+            40% {
+                opacity: .04;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(220%);
+            }
         }
 
         .term .bar {
@@ -367,9 +443,156 @@
             color: #ffd4dc;
         }
 
+        /* DEVOPS AVATAR (ตัวการ์ตูน) */
+        .avatar-wrapper {
+            position: relative;
+            margin-top: 10px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            pointer-events: none;
+        }
+
+        .avatar-orbit {
+            position: absolute;
+            border-radius: 999px;
+            border: 1px dashed rgba(122, 162, 255, 0.4);
+            opacity: .7;
+            animation: orbit 16s linear infinite;
+        }
+
+        .avatar-orbit.orbit1 {
+            width: 110px;
+            height: 110px;
+            left: 8px;
+            top: 4px;
+        }
+
+        .avatar-orbit.orbit2 {
+            width: 80px;
+            height: 80px;
+            left: 22px;
+            top: 20px;
+            animation-duration: 10s;
+            animation-direction: reverse;
+        }
+
+        @keyframes orbit {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .avatar-core {
+            position: relative;
+            width: 78px;
+            height: 78px;
+            border-radius: 24px;
+            background: radial-gradient(circle at 20% 10%, #7aa2ff, #050814);
+            box-shadow:
+                0 0 0 1px rgba(122, 162, 255, 0.5),
+                0 18px 35px rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            animation: floatAvatar 4.5s ease-in-out infinite;
+        }
+
+        @keyframes floatAvatar {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .avatar-face {
+            width: 58px;
+            height: 40px;
+            border-radius: 14px;
+            background: rgba(6, 10, 24, 0.95);
+            border: 1px solid rgba(180, 205, 255, 0.85);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        .avatar-eye {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 30%, #ffffff, #6bffb0);
+            box-shadow: 0 0 10px rgba(107, 255, 176, 0.7);
+            animation: blinkEye 3.8s ease-in-out infinite;
+        }
+
+        .avatar-eye.right {
+            animation-delay: .3s;
+        }
+
+        @keyframes blinkEye {
+            0%,
+            20%,
+            60%,
+            100% {
+                transform: scaleY(1);
+            }
+
+            21%,
+            22%,
+            59% {
+                transform: scaleY(0.15);
+            }
+        }
+
+        .avatar-mouth {
+            position: absolute;
+            bottom: 7px;
+            width: 20px;
+            height: 4px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #ffcc66, #ff6b81);
+            opacity: .9;
+        }
+
+        .avatar-tag {
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 8.5px;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            background: rgba(5, 8, 18, 0.96);
+            border-radius: 999px;
+            padding: 2px 6px;
+            border: 1px solid rgba(122, 162, 255, 0.6);
+            color: #c4d6ff;
+        }
+
+        .avatar-label {
+            margin-left: 110px;
+            font-size: 11px;
+            color: var(--muted);
+            max-width: 200px;
+        }
+
         /* METRICS */
         .metrics {
-            margin-top: 16px;
+            margin-top: 12px;
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 8px;
@@ -383,6 +606,21 @@
             display: flex;
             flex-direction: column;
             gap: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 0 0, rgba(107, 255, 176, 0.14), transparent 60%);
+            opacity: 0;
+            transition: opacity .2s ease;
+        }
+
+        .metric-card:hover::after {
+            opacity: 1;
         }
 
         .metric-label {
@@ -527,6 +765,7 @@
             gap: 8px;
             position: relative;
             overflow: hidden;
+            transition: transform .12s ease, box-shadow .15s ease, border-color .15s ease;
         }
 
         .card::before {
@@ -542,6 +781,12 @@
         .card.featured {
             border-color: rgba(107, 255, 176, 0.7);
             box-shadow: 0 18px 45px rgba(5, 16, 30, 0.95);
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(4, 10, 30, 0.95);
+            border-color: rgba(122, 162, 255, 0.75);
         }
 
         @media (min-width: 900px) {
@@ -660,9 +905,97 @@
             color: var(--muted);
         }
 
+        /* CONTACT SECTION */
+        .contact-section {
+            margin-top: 36px;
+            padding: 18px 16px 16px;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(135deg,
+                    rgba(7, 15, 40, 0.96),
+                    rgba(5, 9, 26, 0.98));
+            border: 1px solid rgba(122, 162, 255, 0.4);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .contact-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            color: var(--muted);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+        }
+
+        .contact-card {
+            border-radius: 14px;
+            padding: 10px 12px;
+            border: 1px solid rgba(122, 162, 255, 0.4);
+            background: rgba(4, 9, 24, 0.98);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            transition: transform .12s ease, box-shadow .16s ease, border-color .15s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 32px rgba(4, 10, 25, 0.9);
+            border-color: var(--accent);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            font-size: 13px;
+        }
+
+        .contact-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--muted);
+        }
+
+        .contact-value {
+            font-weight: 500;
+        }
+
+        .contact-link {
+            font-size: 11px;
+            color: var(--brand);
+            text-decoration: none;
+        }
+
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+
+        .contact-chip {
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(122, 162, 255, 0.5);
+            background: rgba(6, 12, 30, 0.96);
+        }
+
         /* FOOTER */
         footer {
-            margin: 36px 0 18px;
+            margin: 24px 0 18px;
             color: var(--muted);
             font-size: 13px;
             text-align: center;
@@ -684,6 +1017,10 @@
 
             .metrics {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .avatar-label {
+                display: none;
             }
         }
 
@@ -730,6 +1067,9 @@
             </div>
             <div class="nav-links">
                 <a class="btn-ghost btn" href="#projects">Projects</a>
+                <a class="btn-ghost btn" href="#contact">
+                    Contact
+                </a>
                 <a class="btn" href="https://github.com/wisaitas" target="_blank" rel="noopener">
                     <span class="dot-inline"></span> GitHub
                 </a>
@@ -741,9 +1081,11 @@
         <section class="hero-primary">
             <h1><span>Backend · DevOps · SRE · Infra</span></h1>
             <p class="hero-sub">
-                Built around real distributed systems:
+                Production-grade tooling in the real world:
                 <strong>Go, PostgreSQL, Redis, Kafka/RabbitMQ, Docker, Kubernetes, Terraform, GitHub Actions, AWS, k6</strong>.
-                Projects here are fetched live from GitHub, doubling as a <strong>portfolio</strong> of backend/DevOps work and a <strong>playground</strong> for new platform ideas.
+                The projects on this page are fetched live from GitHub — serving as both a
+                <strong>portfolio</strong> and a <strong>playground</strong> for experimenting with ideas and
+                documenting the stories these systems have lived through in production.
             </p>
             <div class="badgebar">
                 <span class="badge">Go • PostgreSQL • Redis</span>
@@ -806,6 +1148,22 @@
                     <div class="metric-sub">public repos</div>
                 </div>
             </div>
+
+            <div class="avatar-wrapper">
+                <div class="avatar-orbit orbit1"></div>
+                <div class="avatar-orbit orbit2"></div>
+                <div class="avatar-core">
+                    <div class="avatar-face">
+                        <div class="avatar-eye left"></div>
+                        <div class="avatar-eye right"></div>
+                        <div class="avatar-mouth"></div>
+                        <div class="avatar-tag">devops bot</div>
+                    </div>
+                </div>
+                <div class="avatar-label">
+                    Repo mascot — think of it as a little DevOps bot watching pipelines, metrics, and alerts, only calling in humans when something turns red. 😄
+                </div>
+            </div>
         </section>
     </header>
 
@@ -826,6 +1184,40 @@
         </div>
 
         <section id="projects" class="grid" aria-live="polite"></section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="contact-section">
+            <div class="contact-header">
+                <div class="contact-title">Contact & Social</div>
+                <div class="contact-chip">พร้อมคุยทั้งเรื่องระบบจริง, career และไอเดีย side project</div>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-info">
+                        <div class="contact-label">LinkedIn</div>
+                        <div class="contact-value">Wisaitas Kampanat</div>
+                        <a class="contact-link"
+                            href="https://www.linkedin.com/in/wisaitas-kampanat-ba8265233/"
+                            target="_blank" rel="noopener">
+                            เปิดดูโปรไฟล์บน LinkedIn
+                        </a>
+                    </div>
+                    <div class="contact-chip">Career / Networking</div>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-info">
+                        <div class="contact-label">Facebook</div>
+                        <div class="contact-value">@Jiwwisaitad</div>
+                        <a class="contact-link"
+                            href="https://www.facebook.com/Jiwwisaitad/"
+                            target="_blank" rel="noopener">
+                            ทักมาคุยชิล ๆ บน Facebook
+                        </a>
+                    </div>
+                    <div class="contact-chip">Personal / Community</div>
+                </div>
+            </div>
+        </section>
 
         <footer>
             <div>Made with ♥ on GitHub Pages •

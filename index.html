@@ -4,23 +4,28 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0b1020" />
+    <meta name="theme-color" content="#050814" />
     <title>wisaitas • Backend · DevOps · SRE · Infra</title>
     <meta name="description"
         content="Portfolio & playground ของ wisaitas — โชว์ผลงานสาย Backend, DevOps, Site Reliability, Infrastructure พร้อมลิสต์โปรเจ็กต์จาก GitHub แบบอัตโนมัติ." />
     <style>
         :root {
-            --bg: #0b1020;
-            --panel: rgba(255, 255, 255, 0.06);
-            --panel-strong: rgba(255, 255, 255, 0.12);
-            --fg: #dbe7ff;
+            --bg: #050814;
+            --bg-alt: #070b18;
+            --panel: rgba(13, 19, 40, 0.95);
+            --panel-soft: rgba(20, 28, 60, 0.8);
+            --panel-strong: rgba(122, 162, 255, 0.35);
+            --fg: #e4ecff;
             --muted: #9fb3d9;
             --brand: #7aa2ff;
             --accent: #6bffb0;
+            --accent-soft: rgba(107, 255, 176, 0.12);
             --warn: #ffcc66;
             --danger: #ff6b81;
             --ok: #3bd671;
-            --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+            --shadow: 0 18px 45px rgba(0, 0, 0, .55);
+            --radius-lg: 20px;
+            --border-subtle: rgba(255, 255, 255, 0.06);
         }
 
         * {
@@ -34,11 +39,27 @@
 
         body {
             margin: 0;
-            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-            background: radial-gradient(1200px 600px at 10% 0%, #0e1530 0%, #0b1020 40%, #060913 100%),
-                conic-gradient(from 210deg at 80% 10%, rgba(122, 162, 255, 0.14), rgba(107, 255, 176, 0.08), transparent 30%) no-repeat;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans",
+                "Apple Color Emoji", "Segoe UI Emoji";
+            background:
+                radial-gradient(1200px 700px at 0% 0%, #0e1640 0%, #050814 40%, #02030a 100%),
+                radial-gradient(800px 500px at 100% 100%, rgba(107, 255, 176, 0.08), transparent 60%);
             color: var(--fg);
             letter-spacing: .2px;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mix-blend-mode: soft-light;
+            opacity: .7;
+            z-index: -1;
         }
 
         a {
@@ -51,148 +72,234 @@
         }
 
         .wrap {
-            max-width: 1100px;
+            max-width: 1150px;
             margin: 0 auto;
-            padding: 24px;
+            padding: 20px 20px 40px;
         }
 
-        /* ——— NAV ——— */
+        /* NAV */
         .nav {
             position: sticky;
             top: 0;
-            z-index: 10;
-            background: linear-gradient(180deg, rgba(11, 16, 32, .9), rgba(11, 16, 32, .6));
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--panel-strong);
+            z-index: 30;
+            backdrop-filter: blur(14px);
+            background: linear-gradient(180deg,
+                    rgba(5, 8, 20, 0.96),
+                    rgba(5, 8, 20, 0.86),
+                    rgba(5, 8, 20, 0.7));
+            border-bottom: 1px solid var(--border-subtle);
         }
 
         .nav-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 12px;
         }
 
         .brand {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 10px;
             font-weight: 700;
+            font-size: 15px;
         }
 
         .brand .dot {
-            width: 10px;
-            height: 10px;
+            width: 11px;
+            height: 11px;
             border-radius: 50%;
             background: var(--accent);
-            box-shadow: 0 0 14px var(--accent);
+            box-shadow: 0 0 18px var(--accent);
+        }
+
+        .brand span:last-child {
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            font-size: 13px;
+            color: var(--muted);
         }
 
         .nav-links {
             display: flex;
-            gap: 14px;
+            gap: 10px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: var(--panel);
-            border: 1px solid var(--panel-strong);
-            padding: 8px 12px;
-            border-radius: 12px;
+            background: linear-gradient(135deg,
+                    rgba(122, 162, 255, 0.16),
+                    rgba(8, 13, 34, 0.96));
+            border: 1px solid rgba(122, 162, 255, 0.45);
+            padding: 7px 12px;
+            border-radius: 999px;
             color: var(--fg);
             text-decoration: none;
-            box-shadow: var(--shadow);
-            transition: transform .08s ease, background .2s ease, border-color .2s ease;
+            box-shadow: 0 10px 30px rgba(8, 13, 34, 0.9);
+            font-size: 13px;
+            cursor: pointer;
+            transition: transform .09s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+            white-space: nowrap;
+        }
+
+        .btn-ghost {
+            background: rgba(10, 16, 40, 0.9);
+            border-color: rgba(122, 162, 255, 0.25);
+            box-shadow: none;
+        }
+
+        .btn span.dot-inline {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--ok);
+            box-shadow: 0 0 8px var(--ok);
         }
 
         .btn:hover {
             transform: translateY(-1px);
-            border-color: var(--brand);
+            box-shadow: 0 16px 36px rgba(4, 10, 25, 0.9);
+            border-color: var(--accent);
         }
 
-        /* ——— HERO ——— */
+        .btn-ghost:hover {
+            background: rgba(13, 19, 52, 0.95);
+        }
+
+        /* HERO */
         .hero {
             display: grid;
             grid-template-columns: 1.1fr .9fr;
             gap: 26px;
-            align-items: center;
-            padding: 40px 0 16px;
+            align-items: stretch;
+            padding: 26px 0 10px;
         }
 
-        .hero h1 {
-            margin: 0 0 10px;
-            font-size: clamp(28px, 4.2vw, 48px);
+        .hero-primary h1 {
+            margin: 0 0 14px;
+            font-size: clamp(28px, 4.2vw, 46px);
             line-height: 1.05;
         }
 
-        .hero p {
+        .hero-primary h1 span {
+            display: inline-block;
+            background: linear-gradient(120deg, #7aa2ff, #6bffb0);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-sub {
             color: var(--muted);
             margin-top: 0;
+            font-size: 15px;
+            max-width: 520px;
+        }
+
+        .hero-sub strong {
+            color: var(--fg);
+            font-weight: 600;
         }
 
         .badgebar {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-top: 16px;
+            margin-top: 14px;
         }
 
         .badge {
-            padding: 6px 10px;
+            padding: 5px 10px;
             border-radius: 999px;
-            border: 1px dashed var(--panel-strong);
-            background: rgba(122, 162, 255, 0.08);
-            font-size: 12px;
+            border: 1px solid rgba(122, 162, 255, 0.35);
+            background: radial-gradient(circle at 0% 0%,
+                    rgba(133, 187, 255, 0.25),
+                    rgba(9, 13, 32, 0.95));
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--muted);
         }
 
+        .hero-secondary {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* TERMINAL + STATUS */
         .term {
-            background: #0a0f1e;
-            border: 1px solid var(--panel-strong);
-            border-radius: 16px;
-            padding: 14px;
+            background: radial-gradient(circle at 0 0, rgba(122, 162, 255, 0.22), transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(107, 255, 176, 0.18), transparent 55%),
+                #050814;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(122, 162, 255, 0.35);
+            padding: 14px 14px 10px;
             box-shadow: var(--shadow);
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .term::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            border: 1px solid rgba(107, 255, 176, 0.08);
+            mix-blend-mode: screen;
+            pointer-events: none;
         }
 
         .term .bar {
             display: flex;
-            gap: 8px;
+            gap: 7px;
             padding-bottom: 8px;
+            align-items: center;
         }
 
-        .dot-r {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #ff5f56;
+        .term-title {
+            margin-left: auto;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            color: var(--muted);
         }
 
-        .dot-y {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #ffbd2e;
-        }
-
+        .dot-r,
+        .dot-y,
         .dot-g {
             width: 10px;
             height: 10px;
             border-radius: 50%;
+        }
+
+        .dot-r {
+            background: #ff5f56;
+        }
+
+        .dot-y {
+            background: #ffbd2e;
+        }
+
+        .dot-g {
             background: #27c93f;
         }
 
         .term pre {
-            margin: 10px 0 0;
-            color: #d3e1ff;
+            margin: 8px 0 0;
+            color: #d6e2ff;
+            font-size: 12px;
             white-space: pre-wrap;
         }
 
         .cursor {
             display: inline-block;
             width: 8px;
-            height: 1.05em;
+            height: 1.08em;
             background: #9cc2ff;
             vertical-align: -2px;
             animation: blink 1s steps(1) infinite;
@@ -204,34 +311,160 @@
             }
         }
 
-        /* ——— TOOLBAR ——— */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+            font-size: 11px;
+        }
+
+        .status-card {
+            border-radius: 999px;
+            border: 1px solid rgba(122, 162, 255, 0.35);
+            background: rgba(11, 16, 36, 0.9);
+            padding: 6px 9px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+            color: var(--muted);
+        }
+
+        .status-label {
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .status-pill {
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            border: 1px solid rgba(59, 214, 113, 0.7);
+            background: rgba(6, 32, 18, 0.96);
+            color: #bdfcd3;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--ok);
+            box-shadow: 0 0 8px var(--ok);
+        }
+
+        .status-pill.warn {
+            border-color: rgba(255, 204, 102, 0.9);
+            background: rgba(46, 34, 6, 0.96);
+            color: #ffe6b3;
+        }
+
+        .status-pill.danger {
+            border-color: rgba(255, 107, 129, 0.95);
+            background: rgba(46, 10, 16, 0.96);
+            color: #ffd4dc;
+        }
+
+        /* METRICS */
+        .metrics {
+            margin-top: 16px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .metric-card {
+            border-radius: 14px;
+            padding: 8px 12px;
+            background: rgba(6, 10, 28, 0.96);
+            border: 1px solid rgba(122, 162, 255, 0.35);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .metric-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--muted);
+        }
+
+        .metric-value {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .metric-sub {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        /* TOOLBAR */
         .toolbar {
+            margin-top: 34px;
+            padding: 14px 14px 10px;
+            border-radius: var(--radius-lg);
+            background: radial-gradient(circle at 0 0, rgba(122, 162, 255, 0.18), transparent 55%),
+                radial-gradient(circle at 100% 100%, rgba(107, 255, 176, 0.16), transparent 55%),
+                var(--panel);
+            border: 1px solid var(--panel-strong);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .toolbar-left {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             align-items: center;
-            justify-content: space-between;
-            margin-top: 40px;
+        }
+
+        .toolbar-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            color: var(--muted);
         }
 
         .filters {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
         }
 
         .chip {
-            background: var(--panel);
-            border: 1px solid var(--panel-strong);
-            padding: 6px 10px;
+            background: rgba(8, 12, 30, 0.95);
+            border: 1px solid rgba(122, 162, 255, 0.35);
+            padding: 5px 10px;
             border-radius: 999px;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 12px;
+            color: var(--muted);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background .15s ease, border-color .15s ease, color .15s ease, transform .06s ease;
+        }
+
+        .chip span.pip {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--brand);
         }
 
         .chip.active {
             border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(107, 255, 176, 0.15) inset;
+            background: var(--accent-soft);
+            color: var(--fg);
+            transform: translateY(-1px);
         }
 
         .search {
@@ -241,97 +474,246 @@
 
         .search input {
             width: 100%;
-            padding: 10px 12px;
-            border-radius: 12px;
-            border: 1px solid var(--panel-strong);
-            background: var(--panel);
+            padding: 9px 11px;
+            border-radius: 999px;
+            border: 1px solid rgba(122, 162, 255, 0.35);
+            background: rgba(4, 7, 18, 0.92);
             color: var(--fg);
+            font-size: 13px;
+            outline: none;
+            transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
         }
 
-        /* ——— PROJECTS ——— */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 16px;
-            margin-top: 16px;
+        .search input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 1px rgba(107, 255, 176, 0.4);
+            background: rgba(4, 9, 22, 0.96);
         }
 
-        .card {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.04));
-            border: 1px solid var(--panel-strong);
-            border-radius: 16px;
-            padding: 16px;
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .card h3 {
-            margin: 0;
-            font-size: 18px;
+        /* PROJECTS GRID */
+        .section-heading {
+            margin: 26px 0 10px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            color: var(--muted);
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
+        .section-heading span.rule {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(122, 162, 255, 0.6), transparent);
+            opacity: .6;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .card {
+            background: linear-gradient(180deg, rgba(18, 27, 66, 0.96), rgba(8, 11, 26, 0.98));
+            border: 1px solid rgba(122, 162, 255, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 14px 14px 12px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            border: 1px solid rgba(7, 255, 176, 0.08);
+            mix-blend-mode: soft-light;
+            pointer-events: none;
+        }
+
+        .card.featured {
+            border-color: rgba(107, 255, 176, 0.7);
+            box-shadow: 0 18px 45px rgba(5, 16, 30, 0.95);
+        }
+
+        @media (min-width: 900px) {
+            .card.featured {
+                grid-column: span 2;
+            }
+        }
+
+        .card h3 {
+            margin: 0;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .repo-name-pill {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(107, 255, 176, 0.6);
+            background: rgba(5, 25, 18, 0.96);
+            color: #bdfcd3;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+        }
+
         .desc {
             color: var(--muted);
-            min-height: 36px;
+            min-height: 34px;
+            font-size: 13px;
         }
 
         .meta {
             display: flex;
+            justify-content: space-between;
             gap: 10px;
             flex-wrap: wrap;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--muted);
+        }
+
+        .meta-left,
+        .meta-right {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .pill {
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(122, 162, 255, 0.45);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pill.soft {
+            border-style: dashed;
+        }
+
+        .star::before {
+            content: "★";
+            margin-right: 4px;
+            color: var(--warn);
+        }
+
+        .lang-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            margin-right: 4px;
+            vertical-align: -1px;
         }
 
         .actions {
             display: flex;
             gap: 8px;
-            margin-top: auto;
+            margin-top: 8px;
         }
 
-        .pill {
+        .btn-sm {
             font-size: 12px;
-            padding: 4px 8px;
-            border: 1px solid var(--panel-strong);
+            padding: 5px 10px;
             border-radius: 999px;
+            background: rgba(5, 9, 24, 0.96);
+            border: 1px solid rgba(122, 162, 255, 0.4);
+            color: var(--fg);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background .15s ease, border-color .15s ease, transform .06s ease;
         }
 
-        .star::before {
-            content: "★ ";
-            color: var(--warn);
-        }
-
-        .lang-dot {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            margin-right: 6px;
-            vertical-align: -1px;
+        .btn-sm:hover {
+            background: rgba(11, 18, 40, 0.98);
+            border-color: var(--accent);
+            transform: translateY(-1px);
         }
 
         .archived {
             border-style: dashed;
-            opacity: .7;
+            opacity: .8;
         }
 
-        /* ——— FOOTER ——— */
-        footer {
-            margin: 40px 0 20px;
+        .empty-card {
+            background: rgba(4, 8, 22, 0.96);
+            border-radius: var(--radius-lg);
+            border: 1px dashed rgba(122, 162, 255, 0.45);
+            padding: 14px;
+            font-size: 13px;
             color: var(--muted);
-            font-size: 14px;
+        }
+
+        /* FOOTER */
+        footer {
+            margin: 36px 0 18px;
+            color: var(--muted);
+            font-size: 13px;
             text-align: center;
         }
 
-        /* ——— Responsive ——— */
+        footer a {
+            color: var(--brand);
+        }
+
+        /* RESPONSIVE */
         @media (max-width: 900px) {
             .hero {
                 grid-template-columns: 1fr;
+            }
+
+            .hero-secondary {
+                order: -1;
+            }
+
+            .metrics {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 700px) {
+            .nav-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .toolbar-left {
+                justify-content: space-between;
+            }
+
+            .metrics {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .metrics {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .status-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
     </style>
@@ -340,82 +722,153 @@
 <body>
     <nav class="nav">
         <div class="wrap nav-inner">
-            <div class="brand"><span class="dot"></span><span>wisaitas::<span
-                        style="color:var(--accent)">portfolio</span></span></div>
+            <div class="brand">
+                <span class="dot"></span>
+                <div>
+                    wisaitas::<span>backend/devops/sre</span>
+                </div>
+            </div>
             <div class="nav-links">
-                <a class="btn" href="#projects">Projects</a>
-                <a class="btn" href="https://github.com/wisaitas" target="_blank" rel="noopener">GitHub</a>
+                <a class="btn-ghost btn" href="#projects">Projects</a>
+                <a class="btn" href="https://github.com/wisaitas" target="_blank" rel="noopener">
+                    <span class="dot-inline"></span> GitHub
+                </a>
             </div>
         </div>
     </nav>
 
     <header class="wrap hero">
-        <div>
-            <h1>Backend · DevOps · SRE · Infra</h1>
-            <p>บันทึกสนามรบของระบบจริง: Go, Postgres, Redis, Kafka/RabbitMQ, Docker, Kubernetes, Terraform, GitHub
-                Actions, AWS. โค้ดพร้อมเล่น—โปรเจ็กต์ดึงสดจาก GitHub.</p>
+        <section class="hero-primary">
+            <h1><span>Backend · DevOps · SRE · Infra</span></h1>
+            <p class="hero-sub">
+                Built around real distributed systems:
+                <strong>Go, PostgreSQL, Redis, Kafka/RabbitMQ, Docker, Kubernetes, Terraform, GitHub Actions, AWS, k6</strong>.
+                Projects here are fetched live from GitHub, doubling as a <strong>portfolio</strong> of backend/DevOps work and a <strong>playground</strong> for new platform ideas.
+            </p>
             <div class="badgebar">
-                <span class="badge">Go</span>
-                <span class="badge">PostgreSQL</span>
-                <span class="badge">Redis</span>
-                <span class="badge">RabbitMQ</span>
-                <span class="badge">Kafka</span>
-                <span class="badge">Docker</span>
-                <span class="badge">Kubernetes</span>
-                <span class="badge">KEDA</span>
-                <span class="badge">Istio</span>
-                <span class="badge">Terraform</span>
-                <span class="badge">GitHub Actions</span>
-                <span class="badge">AWS</span>
-                <span class="badge">k6</span>
+                <span class="badge">Go • PostgreSQL • Redis</span>
+                <span class="badge">Messaging: Kafka / RabbitMQ</span>
+                <span class="badge">Containers: Docker • K8s</span>
+                <span class="badge">Scaling: KEDA / Autoscaling</span>
+                <span class="badge">IaC: Terraform</span>
+                <span class="badge">CI/CD: GitHub Actions</span>
+                <span class="badge">Cloud: AWS</span>
+                <span class="badge">Perf: k6</span>
             </div>
-        </div>
+        </section>
 
-        <div class="term" aria-label="terminal">
-            <div class="bar"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
-            <pre id="terminal"></pre>
-        </div>
+        <section class="hero-secondary">
+            <div class="term" aria-label="terminal">
+                <div class="bar">
+                    <span class="dot-r"></span>
+                    <span class="dot-y"></span>
+                    <span class="dot-g"></span>
+                    <span class="term-title">/home/wisaitas/ops.log</span>
+                </div>
+                <pre id="terminal"></pre>
+            </div>
+
+            <div class="status-grid" aria-hidden="true">
+                <div class="status-card">
+                    <span class="status-label">prod</span>
+                    <span class="status-pill">
+                        <span class="status-dot"></span> healthy
+                    </span>
+                </div>
+                <div class="status-card">
+                    <span class="status-label">staging</span>
+                    <span class="status-pill warn">
+                        • load test
+                    </span>
+                </div>
+                <div class="status-card">
+                    <span class="status-label">pipelines</span>
+                    <span class="status-pill">
+                        <span class="status-dot"></span> green
+                    </span>
+                </div>
+            </div>
+
+            <div class="metrics" id="metrics">
+                <div class="metric-card">
+                    <div class="metric-label">Repositories</div>
+                    <div class="metric-value" id="metric-repos">—</div>
+                    <div class="metric-sub">owned, non-fork</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Languages</div>
+                    <div class="metric-value" id="metric-langs">—</div>
+                    <div class="metric-sub">from GitHub API</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Total Stars</div>
+                    <div class="metric-value" id="metric-stars">—</div>
+                    <div class="metric-sub">public repos</div>
+                </div>
+            </div>
+        </section>
     </header>
 
     <main class="wrap">
-        <div class="toolbar">
-            <div class="filters" id="filters"></div>
-            <div class="search"><input id="q" type="search" placeholder="ค้นหาโปรเจ็กต์… (ชื่อ/คำอธิบาย/ภาษา)" /></div>
+        <section class="toolbar">
+            <div class="toolbar-left">
+                <div class="toolbar-title">Projects</div>
+                <div class="filters" id="filters"></div>
+            </div>
+            <div class="search">
+                <input id="q" type="search" placeholder="ค้นหาโปรเจ็กต์… (ชื่อ / คำอธิบาย / ภาษา)" />
+            </div>
+        </section>
+
+        <div class="section-heading">
+            <span>Latest & featured from GitHub</span>
+            <span class="rule"></span>
         </div>
 
         <section id="projects" class="grid" aria-live="polite"></section>
 
         <footer>
-            <div>Made with ♥ on GitHub Pages • <a href="https://github.com/wisaitas" target="_blank"
-                    rel="noopener">@wisaitas</a></div>
+            <div>Made with ♥ on GitHub Pages •
+                <a href="https://github.com/wisaitas" target="_blank" rel="noopener">@wisaitas</a>
+            </div>
         </footer>
     </main>
 
     <script>
         const username = 'wisaitas';
 
-        // ——— Fancy typewriter for terminal ———
+        // Typewriter text
         const termLines = [
             '$ whoami',
-            'wisaitas — backend/devops/sre',
+            'wisaitas — backend / devops / sre',
+            '',
             '$ stack',
             'go · postgres · redis · kafka/rabbitmq · docker · k8s · terraform · github-actions · aws · k6',
+            '',
             '$ motto',
             'ship small, observe hard, automate everything',
-            '$ ls projects/ — live from GitHub API\n'
+            '',
+            '$ gh api /users/' + username + '/repos --sort=updated',
+            ''
         ];
+
         const tp = document.getElementById('terminal');
         let i = 0, j = 0, buffer = '';
+
         function typeIt() {
             if (i < termLines.length) {
                 const line = termLines[i];
                 if (j <= line.length) {
-                    buffer = termLines.slice(0, i).join('\n') + (i ? '\n' : '') + line.slice(0, j) + '<span class="cursor"></span>';
+                    const done = termLines.slice(0, i).join('\n');
+                    const current = line.slice(0, j);
+                    buffer = (done ? done + '\n' : '') + current + '<span class="cursor"></span>';
                     tp.innerHTML = buffer;
                     j++;
-                    setTimeout(typeIt, 14 + Math.random() * 40);
+                    setTimeout(typeIt, 12 + Math.random() * 38);
                 } else {
-                    i++; j = 0; setTimeout(typeIt, 350);
+                    i++;
+                    j = 0;
+                    setTimeout(typeIt, 320);
                 }
             } else {
                 tp.innerHTML = termLines.join('\n');
@@ -423,84 +876,167 @@
         }
         typeIt();
 
-        // ——— Fetch repos ———
         const projectsEl = document.getElementById('projects');
         const filtersEl = document.getElementById('filters');
         const qEl = document.getElementById('q');
 
-        let repos = [], languages = new Set(), activeLang = 'All';
+        const metricReposEl = document.getElementById('metric-repos');
+        const metricLangsEl = document.getElementById('metric-langs');
+        const metricStarsEl = document.getElementById('metric-stars');
+
+        let repos = [];
+        let languages = new Set();
+        let activeLang = 'All';
 
         async function loadRepos() {
             try {
-                const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`, {
+                const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated&type=owner`, {
                     headers: { 'Accept': 'application/vnd.github+json' }
                 });
                 const data = await res.json();
-                // Filter forks & super-old template junk if any
-                repos = data.filter(r => !r.fork);
-                // Collect languages
-                repos.forEach(r => { if (r.language) languages.add(r.language); });
-                // Sort by stars desc then pushed_at desc
-                repos.sort((a, b) => (b.stargazers_count - a.stargazers_count) || (new Date(b.pushed_at) - new Date(a.pushed_at)));
+                // Filter out forks
+                repos = Array.isArray(data) ? data.filter(r => !r.fork) : [];
+
+                // Collect languages and metrics
+                languages.clear();
+                let totalStars = 0;
+                repos.forEach(r => {
+                    if (r.language) languages.add(r.language);
+                    if (typeof r.stargazers_count === 'number') totalStars += r.stargazers_count;
+                });
+
+                // Sort by stars desc, then updated desc
+                repos.sort((a, b) => {
+                    const starDiff = (b.stargazers_count || 0) - (a.stargazers_count || 0);
+                    if (starDiff !== 0) return starDiff;
+                    return new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime();
+                });
+
+                updateMetrics(totalStars);
                 buildFilters();
                 render();
             } catch (e) {
                 console.error(e);
-                projectsEl.innerHTML = `<div class="card">ไม่สามารถโหลดรายการจาก GitHub ได้ ลองรีเฟรชอีกครั้งภายหลัง</div>`;
+                projectsEl.innerHTML = `<div class="empty-card">ไม่สามารถโหลดรายการจาก GitHub ได้ในตอนนี้ ลองรีเฟรชภายหลังอีกครั้ง.</div>`;
             }
+        }
+
+        function updateMetrics(totalStars) {
+            metricReposEl.textContent = repos.length.toString();
+            metricLangsEl.textContent = languages.size.toString();
+            metricStarsEl.textContent = totalStars.toString();
         }
 
         function buildFilters() {
             const langs = ['All', ...Array.from(languages).sort()];
-            filtersEl.innerHTML = langs.map(l => `<button class="chip${l === activeLang ? ' active' : ''}" data-lang="${l}">${l}</button>`).join('');
-            filtersEl.querySelectorAll('.chip').forEach(btn => btn.addEventListener('click', () => {
-                activeLang = btn.dataset.lang; document.querySelectorAll('.chip').forEach(c => c.classList.remove('active')); btn.classList.add('active'); render();
-            }));
+            filtersEl.innerHTML = langs.map(l => `
+                <button class="chip${l === activeLang ? ' active' : ''}" data-lang="${l}">
+                    <span class="pip"></span>${l}
+                </button>
+            `).join('');
+            filtersEl.querySelectorAll('.chip').forEach(btn =>
+                btn.addEventListener('click', () => {
+                    activeLang = btn.dataset.lang;
+                    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+                    btn.classList.add('active');
+                    render();
+                })
+            );
         }
 
         function humanTime(iso) {
-            const d = new Date(iso); const diff = (Date.now() - d.getTime()) / 1000; // seconds
+            const d = new Date(iso);
+            const diff = (Date.now() - d.getTime()) / 1000;
+            if (!isFinite(diff)) return 'unknown';
             if (diff < 60) return 'just now';
-            const m = diff / 60; if (m < 60) return `${Math.floor(m)}m ago`;
-            const h = m / 60; if (h < 24) return `${Math.floor(h)}h ago`;
-            const day = h / 24; if (day < 30) return `${Math.floor(day)}d ago`;
+            const m = diff / 60;
+            if (m < 60) return `${Math.floor(m)}m ago`;
+            const h = m / 60;
+            if (h < 24) return `${Math.floor(h)}h ago`;
+            const day = h / 24;
+            if (day < 30) return `${Math.floor(day)}d ago`;
             return d.toISOString().split('T')[0];
         }
 
         function langColor(lang) {
-            // tiny palette for popular langs; fallback is brand color
-            const map = { 'Go': '#00ADD8', 'JavaScript': '#f1e05a', 'TypeScript': '#3178c6', 'HTML': '#e34c26', 'CSS': '#563d7c', 'Shell': '#89e051', 'Python': '#3572A5' };
+            const map = {
+                'Go': '#00ADD8',
+                'JavaScript': '#f1e05a',
+                'TypeScript': '#3178c6',
+                'HTML': '#e34c26',
+                'CSS': '#563d7c',
+                'Shell': '#89e051',
+                'Python': '#3572A5',
+                'Java': '#b07219',
+                'Rust': '#dea584'
+            };
             return map[lang] || '#7aa2ff';
         }
 
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text.replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+        }
+
         function render() {
-            const q = qEl.value?.toLowerCase() || '';
+            const q = qEl.value ? qEl.value.toLowerCase() : '';
             const items = repos.filter(r => {
                 const byLang = (activeLang === 'All') || (r.language === activeLang);
-                const byQuery = !q || (r.name?.toLowerCase().includes(q)) || (r.description?.toLowerCase().includes(q)) || (r.language?.toLowerCase().includes(q));
+                const byQuery = !q ||
+                    (r.name && r.name.toLowerCase().includes(q)) ||
+                    (r.description && r.description.toLowerCase().includes(q)) ||
+                    (r.language && r.language.toLowerCase().includes(q));
                 return byLang && byQuery;
             });
 
             if (!items.length) {
-                projectsEl.innerHTML = '<div class="card">ไม่พบโปรเจ็กต์ที่ตรงเงื่อนไข</div>';
+                projectsEl.innerHTML = '<div class="empty-card">ไม่พบโปรเจ็กต์ที่ตรงเงื่อนไข ลองเปลี่ยนภาษา หรือคำค้นดูนะ.</div>';
                 return;
             }
 
-            projectsEl.innerHTML = items.map(r => `
-        <article class="card ${r.archived ? 'archived' : ''}">
-          <h3>${r.name}${r.archived ? ' <span class="pill" title="Archived">archived</span>' : ''}</h3>
-          <div class="desc">${r.description ? r.description.replace(/</g, '&lt;') : '—'}</div>
-          <div class="meta">
-            ${r.language ? `<span class="pill"><span class="lang-dot" style="background:${langColor(r.language)}"></span>${r.language}</span>` : ''}
-            <span class="pill star" title="Stars">${r.stargazers_count}</span>
-            <span class="pill" title="Last push">updated ${humanTime(r.pushed_at)}</span>
-          </div>
-          <div class="actions">
-            <a class="btn" href="${r.html_url}" target="_blank" rel="noopener">Code</a>
-            ${r.homepage ? `<a class="btn" href="${r.homepage}" target="_blank" rel="noopener">Demo</a>` : ''}
-          </div>
-        </article>
-      `).join('');
+            // Top 3 are treated as "featured"
+            const html = items.map((r, idx) => {
+                const featured = idx < 3;
+                const archived = r.archived;
+                const classes = ['card'];
+                if (featured) classes.push('featured');
+                if (archived) classes.push('archived');
+
+                const desc = r.description ? escapeHtml(r.description) : '— no description —';
+
+                return `
+                    <article class="${classes.join(' ')}">
+                        <h3>
+                            ${r.name}
+                            ${featured ? '<span class="repo-name-pill">featured</span>' : ''}
+                            ${archived ? '<span class="repo-name-pill" style="border-color:rgba(255,204,102,0.7);background:rgba(46,34,6,0.96);color:#ffe6b3;">archived</span>' : ''}
+                        </h3>
+                        <div class="desc">${desc}</div>
+                        <div class="meta">
+                            <div class="meta-left">
+                                ${r.language ? `
+                                    <span class="pill">
+                                        <span class="lang-dot" style="background:${langColor(r.language)}"></span>
+                                        ${r.language}
+                                    </span>
+                                ` : ''}
+                                <span class="pill star" title="Stars">${r.stargazers_count || 0}</span>
+                            </div>
+                            <div class="meta-right">
+                                <span class="pill soft" title="Last push">updated ${humanTime(r.pushed_at)}</span>
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <a class="btn-sm" href="${r.html_url}" target="_blank" rel="noopener">Code</a>
+                            ${r.homepage ? `<a class="btn-sm" href="${r.homepage}" target="_blank" rel="noopener">Demo</a>` : ''}
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            projectsEl.innerHTML = html;
         }
 
         qEl.addEventListener('input', render);
